@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "TheSocialTool",
     platforms: [
-        .iOS(.v14), // Adjust as needed
+        .iOS(.v14),  // Adjust to your needs
         .macOS(.v11)
     ],
     products: [
@@ -15,20 +15,22 @@ let package = Package(
     ],
     dependencies: [
         // Facebook iOS SDK
-        .package(url: "https://github.com/facebook/facebook-ios-sdk", from: "16.0.0")
+        .package(url: "https://github.com/facebook/facebook-ios-sdk", exact: "16.0.0") // Ensures correct resolution
     ],
     targets: [
         .target(
             name: "TheSocialTool",
             dependencies: [
-                .product(name: "FacebookLogin", package: "facebook-ios-sdk")
+                .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
+                .product(name: "FBSDKCoreKit", package: "facebook-ios-sdk")
             ],
-            path: "Sources"
+            path: "Sources/TheSocialTool" // Ensure this path exists!
         ),
         .testTarget(
             name: "TheSocialToolTests",
             dependencies: ["TheSocialTool"],
-            path: "Tests"
+            path: "Tests/TheSocialToolTests"
         )
     ]
 )
+
